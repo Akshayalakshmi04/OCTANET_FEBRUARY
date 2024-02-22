@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List 📜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<style>
+body {
+    font-family: Georgia;
+    margin: 0;
+    padding: 0;
+}
+#body{
+    background-image: url("https://i.pinimg.com/736x/88/10/e7/8810e7f0e58a778159baf5781ac61fba.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    margin-top: 200px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-weight: 700;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    font-family:Georgia;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #3ca540;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #217e25;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    width:800px;
+    margin-left:30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-btn {
+    background-color: #d32f2f;
+    color: #fff;
+    width:95px;
+    margin-left:600px;
+    border: none;
+    padding: 10px;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delete-btn:hover {
+    background-color:#a42118;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn i {
+    font-size: 18px;
+}
+</style>
+</head>
+<body id="body">
+    <div class="container">
+        <h1>Task List📜</h1>
+        <ul id="todo-list">
+            <li>
+                <span>Sample Task 1</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete ❌</button>
+            </li>
+            <li>
+                <span>Sample Task 2</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete ❌</button>
+            </li>
+        </ul>
+        <form id="task-form" onsubmit="addTask(); return false;">
+            <input type="text" id="task-input" placeholder="Add a new task..." required>
+            <button type="submit">Add Task ✍🏽</button>
+        </form>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('task-form');
+    const input = document.getElementById('task-input');
+    const todoList = document.getElementById('todo-list');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const task = input.value.trim();
+        if (task !== '') {
+            addTask(task);
+            input.value = '';
+        }
+    });
+
+    function addTask(task) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span>${task}</span>
+            <button class="delete-btn">Delete</button>
+        `;
+        todoList.appendChild(li);
+
+        li.querySelector('.delete-btn').addEventListener('click', function () {
+            li.remove();
+        });
+    }
+});
+        function addTask() {
+            var taskInput = document.getElementById("task-input");
+            var taskList = document.getElementById("todo-list");
+
+            if (taskInput.value.trim() !== '') {
+                var li = document.createElement("li");
+                li.innerHTML = `
+                    <span>${taskInput.value}</span>
+                    <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+                `;
+                taskList.appendChild(li);
+                taskInput.value = '';
+            }
+        }
+
+        function deleteTask(button) {
+            var li = button.parentNode;
+            li.parentNode.removeChild(li);
+        }
+    </script>
+</body>
+</html>
+
